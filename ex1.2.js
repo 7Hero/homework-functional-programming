@@ -6,18 +6,16 @@ Array.prototype.customFilter = function (callback) {
   return this.reduce((prev, curr, idx) => callback(curr, idx) ? [...prev, curr] : prev, []);
 };
 
+// Aici cu reduce nu ii foarte optimizat deoarece eu vreau sa ies din reduce la primul false
 Array.prototype.customEvery = function (callback) {
-  /* Aici cu reduce nu ii foarte optimizat deoarece eu vreau sa ies din reduce la primul false
-  let result = true;
+/*let result = true;
   this.reduce( (prev, curr, idx) => {
     if(!callback(curr,idx)){
       result = false
     }
   });
-  return result;
-  */
-
-  // Optimizat
+  return result; */
+  // Fara .reduce()
   for (let idx = 0; idx < this.length; idx++) {
     if (!callback(this[idx], idx)) {
       return false;
@@ -27,7 +25,6 @@ Array.prototype.customEvery = function (callback) {
 };
 
 Array.prototype.customSome = function(callback) {
-  // Aceeasi ca la every cu Array.reduce nu are sens.
   for (let idx = 0; idx < this.length; idx++) {
     if (callback(this[idx], idx)) {
       return true;
@@ -36,7 +33,6 @@ Array.prototype.customSome = function(callback) {
   return false;
 }
 Array.prototype.customFind = function(callback) {
-  //La fel nu are sens cu Array.reduce 
   for (let idx = 0; idx < this.length; idx++) {
     if (callback(this[idx], idx)) {
       return this[idx]
@@ -46,7 +42,6 @@ Array.prototype.customFind = function(callback) {
 }
 
 Array.prototype.customIndexOf = function(searchElement, fromIndex) {
-  //N-are sens cu reduce
   for (let idx = fromIndex; idx < this.length; idx++) {
     if (searchElement == this[idx]) {
       return idx
@@ -93,7 +88,7 @@ console.log("find", findOriginal);
 console.log('')
 console.log("customIndexOf", indexOf);
 console.log("indexOf", indexOfOriginal);
-// For .every(), .some(), .find(), .indexOf() doesn't make sens because I want to exit early from the function.
-// .every() if one element doesn't satisfy the condition I want to return before the end of array.
-// .some() if one element satisfy the condition I want to return before the end of array.
-// .find() If one element satisfies the condition I want to return the element before the end of array.
+// For .every(), .some(), .find(), .indexOf() doesn't make sense because I want to exit early from these functions.
+// .every() if one element doesn't satisfy the condition I want to return it before the end of the array.
+// .some() if one element satisfy the condition I want to return it before the end of the array.
+// .find() if one element satisfy the condition I want to return the element before the end of array.
