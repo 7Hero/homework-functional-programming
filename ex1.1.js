@@ -13,7 +13,7 @@ const sortByName = (arr, type = 'asc') => {
   if(type == 'asc') nr = 1
   else if(type =='dsc') nr = -1
   else throw 'Type should be asc (Ascending) or dsc (Descending).'
-
+  
   return result.sort((a,b) => a.name > b.name ? nr : -nr )
 }
 
