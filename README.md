@@ -1,2 +1,2 @@
 # homework-functional-programming
-node ex1.<number>.js
+`node <exercise_number>.js`
